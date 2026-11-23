@@ -1,0 +1,760 @@
+:root {
+  --rb-navy: #060B16;
+  --rb-blue: #102043;
+  --rb-panel: rgba(13, 25, 48, 0.85);
+  --rb-red: #E10600;
+  --rb-yellow: #FCD700;
+  --rb-cyan: #00A3E0;
+  --text-main: #F3F6FC;
+  --text-muted: #94A3B8;
+  --border-line: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--rb-navy);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 碳纖維斜紋與遙測背景 */
+.carbon-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(225, 6, 0, 0.16), transparent 40%),
+    radial-gradient(circle at 15% 75%, rgba(16, 32, 67, 0.65), transparent 50%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  pointer-events: none;
+  z-index: -2;
+}
+
+.telemetry-grid {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+h1, h2, h3, h4, .car-number-badge, .aero-node, .kpi-val, .trophy-year {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.rb-red { color: var(--rb-red); }
+.rb-yellow { color: var(--rb-yellow); }
+
+/* 頂部導航列 */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 5%;
+  background: rgba(6, 11, 22, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--rb-red);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.car-number-badge {
+  width: 44px;
+  height: 44px;
+  background: var(--rb-red);
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+  box-shadow: 0 0 18px rgba(225, 6, 0, 0.55);
+}
+
+.team-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--rb-yellow);
+  display: block;
+}
+
+.brand-text h1 {
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav-item {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-item span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--rb-red);
+  margin-right: 4px;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: #fff;
+  background: rgba(225, 6, 0, 0.18);
+}
+
+.drs-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #22C55E;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #22C55E;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22C55E;
+}
+
+/* HERO 區 */
+.hero-section {
+  padding: 3rem 5% 2rem;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.hero-chassis {
+  background: linear-gradient(135deg, rgba(16, 32, 67, 0.72), rgba(6, 11, 22, 0.95));
+  border: 1px solid var(--border-line);
+  border-left: 4px solid var(--rb-red);
+  border-radius: 12px;
+  padding: 1.8rem 2.2rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+.aero-wing-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-line);
+  margin-bottom: 1.8rem;
+}
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.driver-callsign {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--rb-yellow);
+  margin-bottom: 0.6rem;
+}
+
+.flag-nl {
+  display: inline-block;
+  width: 18px;
+  height: 12px;
+  background: linear-gradient(to bottom, #AE1C28 33%, #FFFFFF 33% 66%, #21468B 66%);
+  border-radius: 2px;
+}
+
+.glitch-title {
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin-bottom: 1.6rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+  text-decoration: none;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 700;
+  padding: 0.75rem 1.4rem;
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--rb-red);
+  color: #fff;
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(225, 6, 0, 0.45);
+}
+
+.btn-secondary {
+  border: 1px solid var(--rb-yellow);
+  color: var(--rb-yellow);
+}
+
+.btn-secondary:hover {
+  background: rgba(252, 215, 0, 0.12);
+}
+
+/* 互動賽車遙測艙 */
+.telemetry-cockpit {
+  background: rgba(6, 11, 22, 0.85);
+  border: 1px solid rgba(0, 163, 224, 0.35);
+  border-radius: 10px;
+  padding: 1.1rem;
+}
+
+.cockpit-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--rb-cyan);
+  margin-bottom: 0.6rem;
+}
+
+.f1-schematic {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(circle, rgba(16,32,67,0.5) 0%, rgba(6,11,22,0.9) 100%);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.car-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.aero-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: rgba(6, 11, 22, 0.92);
+  color: #fff;
+  border: 1px solid var(--rb-yellow);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aero-node:hover, .aero-node.active {
+  background: var(--rb-red);
+  border-color: #fff;
+  box-shadow: 0 0 12px rgba(225, 6, 0, 0.8);
+}
+
+.part-readout {
+  margin-top: 0.8rem;
+  padding: 0.75rem 0.9rem;
+  background: rgba(16, 32, 67, 0.55);
+  border-left: 3px solid var(--rb-yellow);
+  border-radius: 4px;
+}
+
+.readout-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--rb-yellow);
+  margin-bottom: 0.2rem;
+}
+
+.part-readout p {
+  font-size: 0.86rem;
+  color: var(--text-main);
+}
+
+/* KPI 數據帶 */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-line);
+}
+
+.kpi-box {
+  background: rgba(6, 11, 22, 0.65);
+  border: 1px solid var(--border-line);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.kpi-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.kpi-val {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0.2rem 0;
+}
+
+.kpi-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* 通用 Sector 區塊 */
+.sector-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2.8rem 5%;
+}
+
+.sector-header {
+  margin-bottom: 1.6rem;
+}
+
+.sector-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--rb-red);
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.sector-header h3 {
+  font-size: 1.85rem;
+  font-weight: 700;
+}
+
+.chassis-card {
+  background: var(--rb-panel);
+  border: 1px solid var(--border-line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.card-bar {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--rb-yellow);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-line);
+}
+
+/* 個人簡介 */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 1.5rem;
+}
+
+.spec-list {
+  list-style: none;
+}
+
+.spec-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+  font-size: 0.92rem;
+}
+
+.spec-list li span {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.spec-list li strong {
+  text-align: right;
+}
+
+.bio-narrative h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+  color: #fff;
+}
+
+.bio-narrative p {
+  color: var(--text-muted);
+  margin-bottom: 1.3rem;
+}
+
+.skill-row {
+  margin-bottom: 0.95rem;
+}
+
+.skill-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  margin-bottom: 0.3rem;
+}
+
+.progress-track {
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--rb-cyan);
+}
+
+.rb-yellow-bg { background: var(--rb-yellow); }
+.rb-red-bg { background: var(--rb-red); }
+
+/* 車隊演進 */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 1.5rem;
+}
+
+.team-card.featured-rb {
+  border-color: rgba(252, 215, 0, 0.45);
+  box-shadow: inset 0 0 30px rgba(225, 6, 0, 0.12);
+}
+
+.team-era {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--rb-cyan);
+  margin-bottom: 0.3rem;
+}
+
+.team-card h4 {
+  font-size: 1.45rem;
+  margin-bottom: 0.3rem;
+}
+
+.chassis-codes {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.team-stats {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 1.1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border-line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--rb-yellow);
+}
+
+/* 榮譽殿堂 */
+.honors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.trophy-card {
+  border-top: 3px solid var(--rb-yellow);
+}
+
+.trophy-year {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--rb-yellow);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.trophy-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.trophy-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.f1-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.f1-table th, .f1-table td {
+  text-align: left;
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid var(--border-line);
+}
+
+.f1-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* 歷代隊友 */
+.filter-bar {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.3rem;
+}
+
+.filter-btn {
+  background: rgba(16, 32, 67, 0.7);
+  color: var(--text-muted);
+  border: 1px solid var(--border-line);
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background: var(--rb-red);
+  color: #fff;
+  border-color: var(--rb-red);
+}
+
+.teammates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.mate-card.hidden {
+  display: none;
+}
+
+.mate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.mate-years {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.mate-team-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.mate-team-tag.tr { background: rgba(0, 163, 224, 0.2); color: var(--rb-cyan); }
+.mate-team-tag.rb { background: rgba(225, 6, 0, 0.22); color: #FF6B6B; }
+.mate-team-tag.current { background: rgba(252, 215, 0, 0.22); color: var(--rb-yellow); }
+
+.mate-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.mate-role {
+  font-size: 0.8rem;
+  color: var(--rb-yellow);
+  margin-bottom: 0.6rem;
+}
+
+.mate-note {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.current-squad {
+  border-color: var(--rb-yellow);
+}
+
+/* 知識庫 Markdown 瀏覽器 */
+.wiki-browser {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  background: var(--rb-panel);
+  border: 1px solid var(--border-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.wiki-sidebar {
+  background: rgba(6, 11, 22, 0.9);
+  border-right: 1px solid var(--border-line);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--rb-yellow);
+  margin-bottom: 0.4rem;
+}
+
+.wiki-file-btn {
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.wiki-file-btn:hover, .wiki-file-btn.active {
+  background: rgba(16, 32, 67, 0.95);
+  color: #fff;
+  border-color: var(--rb-cyan);
+}
+
+.wiki-viewer {
+  padding: 1.6rem 2rem;
+  font-size: 0.94rem;
+}
+
+.wiki-viewer h4 {
+  font-size: 1.35rem;
+  color: var(--rb-yellow);
+  margin-bottom: 0.8rem;
+}
+
+.wiki-viewer p, .wiki-viewer li {
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.wiki-viewer ul {
+  padding-left: 1.3rem;
+}
+
+.wiki-code-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  background: rgba(225, 6, 0, 0.2);
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+}
+
+/* Footer */
+.f1-footer {
+  border-top: 1px solid var(--border-line);
+  padding: 1.5rem 5%;
+  margin-top: 2rem;
+  background: rgba(6, 11, 22, 0.95);
+}
+
+.footer-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 980px) {
+  .hero-main, .profile-grid, .timeline-grid, .wiki-browser {
+    grid-template-columns: 1fr;
+  }
+  .kpi-strip, .honors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .teammates-grid {
+    grid-template-columns: 1fr;
+  }
+  .nav-links {
+    display: none;
+  }
+}
